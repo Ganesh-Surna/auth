@@ -13,7 +13,9 @@ export default function NewsLetterSignup(){
     },[state, data])
     
     return <fetcher.Form method="post" action="/newsletter">
-        <input type="email" name="email" placeholder="Enter your email"/>
+        <input type="email" name="email" placeholder="Enter your email"
+            aria-label="Sign up for newsletter"
+        />
         <button>SignUp</button>
     </fetcher.Form>
 }

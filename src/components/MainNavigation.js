@@ -1,10 +1,12 @@
 import { Form, NavLink, useRouteLoaderData } from "react-router-dom";
 import "../styles.css";
 import NewsLetterSignup from "./NewsLetterSignup";
-import { getAuthToken } from "../util/auth";
 
 export default function MainNavigation(){
     const token=useRouteLoaderData("root");
+    console.log(token);
+
+    const isLoggedIn= token && token!=="EXPIRED";
 
     return (
         <header className="header">
@@ -19,10 +21,10 @@ export default function MainNavigation(){
                     <li>
                         <NavLink to="newsletter" className={({isActive})=>isActive ? "active" : ""}>Newsletter</NavLink>
                     </li>
-                    {!token && <li>
+                    {!isLoggedIn && <li>
                         <NavLink to="auth?mode=login" className={({isActive})=>isActive ? "active" : ""}>Authentication</NavLink>
                     </li>}
-                    {token && <li>
+                    {isLoggedIn  && <li>
                         <Form method="post" action="/logout">
                             <button>Logout</button>
                         </Form>

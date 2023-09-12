@@ -8,6 +8,8 @@ export default function EventDetails(){
     const submit= useSubmit();
     const token=getAuthToken();
 
+    const isLoggedIn= token && token!=="EXPIRED";
+
     const {eventKey, eventsKey}= useRouteLoaderData("event");
 
     function startDeleteHandler() {
@@ -27,7 +29,7 @@ export default function EventDetails(){
                     <h1>{event.title}</h1>
                     <time>{event.date}</time>
                     <p>{event.description}</p>
-                    {token && <menu className={classes.actions}>
+                    {isLoggedIn && <menu className={classes.actions}>
                         <Link to="edit">Edit</Link>
                         <button onClick={startDeleteHandler}>Delete</button>
                     </menu>}
